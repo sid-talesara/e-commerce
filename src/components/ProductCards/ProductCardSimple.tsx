@@ -1,7 +1,13 @@
+import { simpleProductCardProps } from "@/shared/types/types";
 import Image from "next/image";
 import React from "react";
 
-const ProductCardSimple = () => {
+const ProductCardSimple = ({
+  productName,
+  price,
+  discountedPrice,
+  category,
+}: simpleProductCardProps) => {
   return (
     <div className="shadow-lg p-5 rounded-md w-fit">
       {/* image */}
@@ -24,15 +30,15 @@ const ProductCardSimple = () => {
       {/* other info */}
       <div className="flex flex-col">
         {/* category */}
-        <h6 className="text-slate-500 text-sm py-2">Hoodies</h6>
+        <h6 className="text-slate-500 text-sm py-2">{category}</h6>
         {/* name */}
-        <h3 className="text-lg font-semibold py-1">Good Vibes Hoodie</h3>
+        <h3 className="text-lg font-semibold py-1">{productName}</h3>
         {/* colors and price */}
         <div className="flex justify-between items-center py-1 ">
           {/* price */}
           <div className="flex gap-2 items-center">
-            <p className="text-lg font-semibold">₹799</p>
-            <p className="line-through text-slate-500">₹999</p>
+            <p className="text-lg font-semibold">₹{discountedPrice}</p>
+            <p className="line-through text-slate-500">₹{price}</p>
           </div>
         </div>
       </div>

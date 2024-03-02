@@ -1,0 +1,76 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+
+model User {
+  userId         String   
+  customerId      String   @default(cuid()) @id
+  userName       String?
+  name           String?
+  email          String  @unique
+  password       String
+  phone          String?
+  created_at     DateTime @default(now()) @map(name: "created_at")
+  status          String?  @default("unverified")
+  role            String?  @default("user")
+  shippingAddress String?
+  orders         Order[]
+}
+
+model Order {
+  orderId     String   @id
+  customerId  String
+  createdAt   DateTime?
+  productId   String
+  orderStatus String?
+  billAmount  Int?
+  customer    User     @relation(fields: [customerId], references: [customerId])
+  product     Product  @relation(fields: [productId], references: [productId])
+  orderDetails OrderDetail[]
+}
+
+model OrderDetail {
+  orderId    String     @default(cuid()) @id
+  productId  String
+  quantity   Int?
+  totalAmount Int?
+  order      Order   @relation(fields: [orderId], references: [orderId])
+}
+
+model Product {
+    productId        String @id @default(uuid())
+  productName        String
+  productDescription String?
+  productSmallDesc   String?
+  price              Int?
+  discountedPrice    Int?
+  category           String?
+  inventory          Int?
+  productImages      ProductImage[]
+  productVariants    ProductVariant[]
+  orders             Order[]
+}
+
+model ProductImage {
+  imageId   String     @default(cuid()) @id
+  productId String
+  imageUrl  String?
+  product   Product @relation(fields: [productId], references: [productId])
+}
+
+model ProductVariant {
+  variantId String     @default(cuid()) @id
+  productId String
+  color     String?
+  size      String?
+  product   Product @relation(fields: [productId], references: [productId])
+}
