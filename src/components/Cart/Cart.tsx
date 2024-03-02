@@ -2,7 +2,8 @@ import Image from "next/image";
 import React from "react";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { IoCloseCircle } from "react-icons/io5";
-const Cart = ({ toggleCart, setToggleCart }) => {
+import { CartProps } from "@/shared/types/types";
+const Cart: React.FC<CartProps> = ({ toggleCart, setToggleCart }) => {
   return (
     <>
       {toggleCart && (

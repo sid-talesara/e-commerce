@@ -103,7 +103,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        <button onClick={() => setToggleCart(!toggleCart)}>open</button>
         <Cart toggleCart={toggleCart} setToggleCart={setToggleCart} />
       </header>
     </div>
