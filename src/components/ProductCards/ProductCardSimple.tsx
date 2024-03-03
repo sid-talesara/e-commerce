@@ -1,15 +1,21 @@
 import { simpleProductCardProps } from "@/shared/types/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ProductCardSimple = ({
+  productId,
   productName,
   price,
   discountedPrice,
   category,
 }: simpleProductCardProps) => {
+  console.log(productId);
   return (
-    <div className="shadow-lg p-5 rounded-md w-fit">
+    <Link
+      href={`http://localhost:3000/products/${productId}`}
+      className="shadow-lg p-5 rounded-md w-fit"
+    >
       {/* image */}
       <div className="relative w-60">
         <div className="absolute object-contain flex justify-center bottom-0 h-96 md:h-80 z-10 opacity-100 transition-opacity duration-700 hover:opacity-0 w-full bg-white overflow-hidden dark:bg-gray-800">
@@ -42,7 +48,7 @@ const ProductCardSimple = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

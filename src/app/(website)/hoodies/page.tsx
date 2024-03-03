@@ -1,17 +1,11 @@
-import ProductCardSimple from "@/components/ProductCards/ProductCardSimple";
-import { getProducts, getProductsLimit } from "@/utils/sharedFunction";
-import React from "react";
+import HoodiesMain from "./HoodiesMain";
 
-const page = async () => {
-  const products = await getProductsLimit(1, "Example Category");
-
+const Page = () => {
   return (
-    <div className=" container  mx-auto flex justify-center flex-wrap gap-10">
-      {products.map((item) => (
-        <ProductCardSimple {...item} />
-      ))}
+    <div className="container mx-auto">
+      <HoodiesMain />
     </div>
   );
 };
 
-export default page;
+export default Page;
